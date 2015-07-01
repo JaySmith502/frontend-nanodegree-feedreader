@@ -18,15 +18,15 @@ Learning how to build tests in a TDD framework such as Jasmine will give me anot
 
 ## Resources used
 
- jasmine.github.io
- Udacity Forums
- Udacity Javascript Style Guide
- https://jquery.com/
- StackOverflow - several posts related to Jasmine, nothing especially specific to my project just general reading
- agiledata.org/essays/tdd.htm
- https://msdn.microsoft.com/en-us/library/aa730844(v=vs.80).aspx
- http://code.tutsplus.com/tutorials/testing-your-javascript-with-jasmine--net-21229
- http://evanhahn.com/how-do-i-jasmine/
- http://jslint.com/
- http://jshint.com/
- http://jsbeautifier.org/
+#### jasmine.github.io
+#### Udacity Forums
+#### Udacity Javascript Style Guide
+#### https://jquery.com/
+#### StackOverflow - several posts related to Jasmine, nothing especially specific to my project just general reading
+#### agiledata.org/essays/tdd.htm
+#### https://msdn.microsoft.com/en-us/library/aa730844(v=vs.80).aspx
+#### http://code.tutsplus.com/tutorials/testing-your-javascript-with-jasmine--net-21229
+#### http://evanhahn.com/how-do-i-jasmine/
+#### http://jslint.com/
+#### http://jshint.com/
+#### http://jsbeautifier.org/
