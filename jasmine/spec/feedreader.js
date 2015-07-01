@@ -119,7 +119,7 @@ $(function() {
         it('show at least a single entry at completion of call', function(done) {
 
             expect($(".entry").length).not.toBe(0);
-
+            done();
         });
     });
     /* TODO: Write a new test suite named "New Feed Selection"*/
