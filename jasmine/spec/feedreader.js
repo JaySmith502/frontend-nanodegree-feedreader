@@ -1,3 +1,12 @@
+// TODO:  explain/personalize my code in the TODO blocks--DONE;
+// TODO:  correct implementation of Math.random in the final suite--DONE;
+// TODO:  remove empty line at line 85-87--DONE;
+// TODO:  remove done(); it's unnecessary--DONE;
+// TODO:  implement the empty() in the New Feed Selection suite to keep old tests from impacting current test--DONE;
+// TODO:  delete done() from end of 'New Feed Selection' suite--DONE;
+// TODO:  rerun code through jsbeautifier.org, likely have messed it up a bit with these corrections;
+// TODO:  rewrite README and remove stock wording;
+
 /* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
@@ -20,6 +29,7 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
+        //breaking the allFeeds in html causes the test to fail
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
@@ -29,6 +39,9 @@ $(function() {
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
+         **space
+         **Used allFeeds.forEach to iterate through each instance of the feeds
+         **toBeDefined worked as needed here, and used not.toBe(0) to ensure something there as needed
          */
         it('have URLs and they are defined', function() {
             //had to use lower case url instead of URL, this throws a Jasmine error
@@ -43,7 +56,7 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-        //do this the same as the URL test above
+        //**do this the same as the URL test above, works as above
         it('have a name', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
@@ -55,13 +68,15 @@ $(function() {
 
     /* TODO: Write a new test suite named "The menu" */
     describe('The Menu', function() {
-
+        //assign local variable to menuVisibility and menuClicker for global use within this suite
         var menuVisibility = $('body').attr("class");
         var menuClicker = $(".menu-icon-link");
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
+         * separate TODO from my comments
+         **check for the css class 'menu-hidden' which tells us this element is not visible
          */
         it('is hidden by default', function() {
             expect(menuVisibility).toBe('menu-hidden');
@@ -72,6 +87,7 @@ $(function() {
          * should have two expectations: does the menu display when
          * clicked and does it hide when clicked again.
          */
+        //**clicks on the menu to open and close it to check it's inheritance of 'menu-hidden' or lack thereof
         it("toggles visibility", function() {
 
             menuClicker.click();
@@ -83,12 +99,11 @@ $(function() {
         });
     });
 
-
-
-
     /* TODO: Write a new test suite named "Initial Entries"*/
     describe('Initial Entries', function() {
-        //use beforEach to call the feeds before the test runs
+        /* use beforEach to call the feeds before the test runs
+         * this will load up the first feed in the array, which will allow 'it' to check it against our criteria
+         */
         beforeEach(function(done) {
 
             loadFeed(0, done);
@@ -98,11 +113,12 @@ $(function() {
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
+         * space
+         **after the beforeEach function loads the feed, below checks to see if it has length>0, which indicates something is there
          */
         it('show at least a single entry at completion of call', function(done) {
 
             expect($(".entry").length).not.toBe(0);
-            done();
 
         });
     });
@@ -113,20 +129,22 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.*/
 
-         //used Math.random so test could iterate through any feed choice on the current menu, for future iterations a counter could be used to address the addition of more feeds or just hard code the end number
-        var feedChoice = Math.random(1, 3);
+        //used Math.random so test could iterate through any feed choice on the current menu, for future iterations a counter could be used to address the addition of more feeds or just hard code the end number
+        //according to Udacity reviewer my use of Math.random is buggy because it only returns between 0 and 1, so I'm going to scrap that and go with something a little more direct
+        //var feedChoice = Math.random(1, 3);--Buggy needs to be replaced
+        //replaced old feedChoice with Math.floor(Math.random() * 3) + 1;
+        var feedChoice = Math.floor(Math.random() * 3) + 1;
+        //create global variable within this scope to push from beforeEach function;
         var oldFeedContent;
-
+        //use .empty() to refresh feed container and keep test from being impacted by leftover content from previous test
         beforeEach(function(done) {
             loadFeed(0, function() {
+                $('.feed').empty();
                 oldFeedContent = $('.feed').html();
                 loadFeed(feedChoice, done);
             });
-
-            done();
-
         });
-
+        // use expect to see if the newly chosen .feed is different than the original invoked in the beforeEach function above
         it('actually displays new content', function() {
             expect($('.feed').html()).not.toBe(oldFeedContent);
         }, 2000);
