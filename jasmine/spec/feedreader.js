@@ -25,10 +25,7 @@ $(function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
-
-
-        /* 
-         **Used allFeeds.forEach to iterate through each instance of the feeds
+        /**Used allFeeds.forEach to iterate through each instance of the feeds
          **toBeDefined worked as needed here, and used not.toBe(0) to ensure something there as needed
          */
         it('have URLs and they are defined', function() {
@@ -53,11 +50,9 @@ $(function() {
         var menuVisibility = $('body').attr("class");
         var menuClicker = $(".menu-icon-link");
         //check for the css class 'menu-hidden' which tells us this element is not visible
-        
         it('is hidden by default', function() {
             expect(menuVisibility).toBe('menu-hidden');
         });
-
         //**clicks on the menu to open and close it to check it's inheritance of 'menu-hidden' or lack thereof
         it('toggles visibility', function() {
 
@@ -105,7 +100,6 @@ $(function() {
         afterEach(function() {
             oldFeedContent = 0;
         });
-
         // use expect to see if the newly chosen .feed is different than the original invoked in the beforeEach function above
         it('actually displays new content', function() {
             expect($('.feed').html()).not.toBe(oldFeedContent);
