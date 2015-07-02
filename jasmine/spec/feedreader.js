@@ -1,12 +1,3 @@
-// TODO:  explain/personalize my code in the TODO blocks--DONE;
-// TODO:  correct implementation of Math.random in the final suite--DONE;
-// TODO:  remove empty line at line 85-87--DONE;
-// TODO:  remove done(); it's unnecessary--DONE;
-// TODO:  implement the empty() in the New Feed Selection suite to keep old tests from impacting current test--DONE;
-// TODO:  delete done() from end of 'New Feed Selection' suite--DONE;
-// TODO:  rerun code through jsbeautifier.org, likely have messed it up a bit with these corrections;
-// TODO:  rewrite README and remove stock wording;
-
 /* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
@@ -88,7 +79,7 @@ $(function() {
          * clicked and does it hide when clicked again.
          */
         //**clicks on the menu to open and close it to check it's inheritance of 'menu-hidden' or lack thereof
-        it("toggles visibility", function() {
+        it('toggles visibility', function() {
 
             menuClicker.click();
             expect($('body').hasClass("menu-hidden")).toEqual(false);
@@ -101,7 +92,7 @@ $(function() {
 
     /* TODO: Write a new test suite named "Initial Entries"*/
     describe('Initial Entries', function() {
-        /* use beforEach to call the feeds before the test runs
+        /* use beforEach to call the feeds before the test runs (SETUP)
          * this will load up the first feed in the array, which will allow 'it' to check it against our criteria
          */
         beforeEach(function(done) {
@@ -136,14 +127,18 @@ $(function() {
         var feedChoice = Math.floor(Math.random() * 3) + 1;
         //create global variable within this scope to push from beforeEach function;
         var oldFeedContent;
-        //use .empty() to refresh feed container and keep test from being impacted by leftover content from previous test
+
         beforeEach(function(done) {
             loadFeed(0, function() {
-                $('.feed').empty();
                 oldFeedContent = $('.feed').html();
                 loadFeed(feedChoice, done);
             });
         });
+        //use afterEach (var  =  0 or null) to refresh feed container and keep test from being impacted by leftover content from previous test, using .empty() kept breaking the code
+        afterEach(function() {
+            oldFeedContent = 0;
+        });
+
         // use expect to see if the newly chosen .feed is different than the original invoked in the beforeEach function above
         it('actually displays new content', function() {
             expect($('.feed').html()).not.toBe(oldFeedContent);
